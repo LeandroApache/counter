@@ -1,0 +1,25 @@
+.button {
+    padding: 5px 10px;
+    border: none;
+    color: #222930;
+    background-color: #4EB1BA;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.button:disabled {
+    opacity: 0.3;
+}
+
+.button:hover {
+    box-shadow: 0 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.button:hover:disabled {
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.button:active {
+    opacity: 0.6;
+
+}

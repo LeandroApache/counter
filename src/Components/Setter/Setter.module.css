@@ -1,0 +1,50 @@
+.setter {
+    flex: 0 0 25%;
+}
+
+.setterBody {
+    padding: 15px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-around;
+
+    border-radius: 15%;
+    border: 2px solid #4EB1BA;
+    background-color: #E9E9E9;
+    color: #4EB1BA;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.setterActions {
+    padding: 10px;
+    flex: 1 1 60%;
+    border-radius: 15%;
+    border: 2px solid #4EB1BA;
+    /*text-align: center;*/
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.setterActions label,
+.setterActions input {
+    width: 45%;
+}
+
+.error {
+    border-color: darkred;
+    background-color: #d02552;
+}
+
+.setterControls {
+    flex: 0 1 30%;
+    border-radius: 10%;
+    border: 2px solid #4EB1BA;
+    padding: 10px;
+
+    display: flex;
+    justify-content: center;
+}
