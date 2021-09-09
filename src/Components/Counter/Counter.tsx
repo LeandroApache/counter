@@ -1,25 +1,34 @@
 import React from 'react';
 import classes from "./Counter.module.css";
 import {Button} from "../UI/Button/Button";
+import {outputModeType} from "../../App";
 
 export type counterPropsType = {
   value: number
   minValue: number
   maxValue: number
-  warningMessage: string
+  outputMode: outputModeType
   onIncreaseValue: () => void
   onResetValue: () => void
 }
 
 export function Counter(props: counterPropsType) {
 
+  let warningMessage = "";
+  if (props.outputMode === "ERROR") {
+    warningMessage = "Invalid input!!!"
+  }
+  if (props.outputMode === "SET") {
+    warningMessage = "Enter values and press SET";
+  }
+
   return (
     <div className={classes.counter}>
       <div className={`${classes.counterOutput} ${props.value === props.maxValue && classes.max}`}>
-        {props.warningMessage
+        {warningMessage
           ? <div
-            className={`${classes.counterWarning} ${props.warningMessage === "Invalid input!!!" ? classes.error : ""}`}>
-            {props.warningMessage}
+            className={`${classes.counterWarning} ${warningMessage === "Invalid input!!!" ? classes.error : ""}`}>
+            {warningMessage}
           </div>
           : <div>{props.value}</div>
         }

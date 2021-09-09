@@ -10,11 +10,10 @@ export type startDataType = {
 export type outputModeType = "DEFAULT" | "SET" | "ERROR";
 
 export function App() {
-  const [maxValue, setMaxValue] = useState(7);
-  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState<number>(7);
+  const [minValue, setMinValue] = useState<number>(0);
   const [value, setValue] = useState<number>(minValue);
   const [outputMode, setOutputMode] = useState<outputModeType>("DEFAULT");
-
 
   useEffect(()=>{
     let currentValue = localStorage.getItem('startData');
@@ -34,14 +33,6 @@ export function App() {
     localStorage.setItem('startData', JSON.stringify(startData));
   }, [value]);
 
-  let warningMessage = "";
-  if (outputMode === "ERROR") {
-    warningMessage = "Invalid input!!!"
-  }
-  if (outputMode === "SET") {
-    warningMessage = "Enter values and press SET";
-  }
-
   const increaseValueHandler = () => {
     setValue(value + 1);
   }
@@ -53,18 +44,19 @@ export function App() {
     setMinValue(startData.minValue);
     setValue(startData.minValue);
   }
-
   const changeOutputModeHandler = (message: outputModeType) => {
     setOutputMode(message);
   }
   return (
     <div className={'App'}>
-      <Setter onSetStartData={setStartValuesHandler} onChangeMessage={changeOutputModeHandler}/>
+      <Setter
+        onSetStartData={setStartValuesHandler}
+        onChangeMessage={changeOutputModeHandler}/>
       <Counter
         value={value}
         maxValue={maxValue}
         minValue={minValue}
-        warningMessage={warningMessage}
+        outputMode={outputMode}
         onIncreaseValue={increaseValueHandler}
         onResetValue={resetValueHandler}/>
     </div>
