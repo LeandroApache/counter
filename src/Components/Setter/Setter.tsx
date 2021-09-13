@@ -41,10 +41,10 @@ export function Setter(props: setterPropsType) {
     e.preventDefault();
     let newStartData = {
       minValue: +currentMinValue,
-      maxValue: +currentMaxValue
+      maxValue: +currentMaxValue,
+      outputMode: "DEFAULT"
     }
     props.onSetStartData(newStartData);
-    props.onChangeMessage("DEFAULT");
   }
 
   return (
@@ -60,8 +60,7 @@ export function Setter(props: setterPropsType) {
                    onChange={changeMaxValueHandler}/>
           </div>
           <div className={classes.setterControls}>
-            <Button onClick={() => {
-            }} type={"submit"} title={"Set"} isDisabled={maxInputError || minInputError || false}/>
+            <Button type={"submit"} title={"Set"} isDisabled={maxInputError || minInputError || false}/>
           </div>
         </div>
       </form>

@@ -7,21 +7,17 @@ export type counterPropsType = {
   value: number
   minValue: number
   maxValue: number
-  outputMode: outputModeType
+  outputMode: string
   onIncreaseValue: () => void
   onResetValue: () => void
 }
 
 export function Counter(props: counterPropsType) {
-
-  let warningMessage = "";
-  if (props.outputMode === "ERROR") {
-    warningMessage = "Invalid input!!!"
-  }
-  if (props.outputMode === "SET") {
-    warningMessage = "Enter values and press SET";
+  let setWarningMessage = (outputMode: string)=> {
+    return outputMode === "ERROR" ? "Invalid input!!!" : outputMode === "SET" ? "Enter values and press SET" : "";
   }
 
+  const warningMessage = setWarningMessage(props.outputMode);
   return (
     <div className={classes.counter}>
       <div className={`${classes.counterOutput} ${props.value === props.maxValue && classes.max}`}>
