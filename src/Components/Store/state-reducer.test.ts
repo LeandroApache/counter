@@ -6,7 +6,7 @@ import {
   setStartValuesAC,
   stateReducer
 } from "./state-reducer";
-import {startDataType, stateType} from "../../App";
+import {outputModeType, startDataType, stateType} from "../../App";
 
 let initialState: stateType = {
   maxValue: 0,
@@ -54,7 +54,7 @@ test("new start values should be added", () => {
   expect(resultState.outputMode).toBe("SET");
 })
 test("property outputMode should be changed", () => {
-  let newModeValue = "ERROR";
+  let newModeValue : outputModeType= "ERROR";
   let action = changeOutputsAC(newModeValue);
   let resultState = stateReducer(initialState, action);
   expect(resultState.value).toBe(1);

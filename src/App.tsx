@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, {useEffect, useReducer} from 'react';
 import {Setter} from "./Components/Setter/Setter";
 import {Counter} from "./Components/Counter/Counter";
 import "./App.css";
@@ -9,11 +9,13 @@ import {
   setStartValuesAC,
   stateReducer
 } from "./Components/Store/state-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./Components/Store/store";
 
 export type startDataType = {
   minValue: number
   maxValue: number
-  outputMode: string
+  outputMode: outputModeType
 }
 export type outputModeType = "DEFAULT" | "SET" | "ERROR";
 export type stateType = {
@@ -24,23 +26,18 @@ export type stateType = {
 }
 
 export function App() {
-  const [state, dispatchToReducer] = useReducer(stateReducer, {
-    maxValue: 7,
-    minValue: 0,
-    value: 0,
-    outputMode: "DEFAULT",
-  })
+  const dispatch = useDispatch();
+
+  let state = useSelector<AppRootStateType,stateType>(state=>state.counter);
 
   useEffect(()=>{
     let currentValue = localStorage.getItem('startData');
     if (currentValue) {
       let newValue = JSON.parse(currentValue);
       getToLocalStorage(newValue);
-      // setValue(newValue.value);
-      // setMinValue(newValue.minValue);
-      // setMaxValue(newValue.maxValue);
     }
   }, []);
+
   useEffect(()=>{
     let startData = {
       minValue: state.minValue,
@@ -51,40 +48,20 @@ export function App() {
   }, [state.value]);
 
   const getToLocalStorage = (data: {value: number, minValue: number, maxValue: number})=> {
-    dispatchToReducer(getToLocalStorageAC(data));
-    // setState({
-    //   ...state,
-    //   value: data.value,
-    //   minValue: data.minValue,
-    //   maxValue: data.maxValue,
-    // })
+    dispatch(getToLocalStorageAC(data));
   }
 
   const increaseValueHandler = () => {
-    dispatchToReducer(increaseValueAC());
-    // setState({...state, value: state.value + 1});
+    dispatch(increaseValueAC());
   }
   const resetValueHandler = () => {
-    dispatchToReducer(resetValueAC());
-    // setState({...state, value: state.minValue});
+    dispatch(resetValueAC());
   }
   const setStartValuesHandler = (startData: startDataType) => {
-    dispatchToReducer(setStartValuesAC(startData));
-  //   setState({
-  //     ...state,
-  //     minValue: startData.minValue,
-  //     maxValue: startData.maxValue,
-  //     value: startData.minValue,
-  //     outputMode: startData.outputMode,
-  // }
-// );
+    dispatch(setStartValuesAC(startData));
 }
 const changeOutputModeHandler = (message: outputModeType) => {
-    dispatchToReducer(changeOutputsAC(message));
-  // setState({
-  //   ...state,
-  //   outputMode: message,
-  // });
+    dispatch(changeOutputsAC(message));
 }
 return (
   <div className={'App'}>

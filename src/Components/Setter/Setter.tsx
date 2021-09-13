@@ -39,7 +39,7 @@ export function Setter(props: setterPropsType) {
 
   const addNewStartDataHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let newStartData = {
+    let newStartData : startDataType = {
       minValue: +currentMinValue,
       maxValue: +currentMaxValue,
       outputMode: "DEFAULT"

@@ -1,4 +1,4 @@
-import {startDataType, stateType} from "../../App";
+import {outputModeType, startDataType, stateType} from "../../App";
 
 export type increaseValueAT = {
   type: "INCREASE_VALUE"
@@ -12,11 +12,11 @@ export type setStartValuesAT = {
 }
 export type changeOutputsAT = {
   type: "CHANGE_OUTPUT"
-  message: string
+  message: outputModeType
 }
 export type getToLocalStorageAT = {
   type: "GET_TO_LOCAL_STORAGE"
-  data: {value: number, minValue: number, maxValue: number}
+  data: { value: number, minValue: number, maxValue: number }
 }
 
 export type stateReducerActionType =
@@ -27,7 +27,13 @@ export type stateReducerActionType =
   | getToLocalStorageAT;
 
 
-export const stateReducer = (state: stateType, action: stateReducerActionType): stateType => {
+let initialState : stateType = {
+  maxValue: 7,
+  minValue: 0,
+  value: 0,
+  outputMode: "DEFAULT",
+}
+export const stateReducer = (state: stateType = initialState, action: stateReducerActionType): stateType => {
   switch (action.type) {
     case "INCREASE_VALUE":
       return {...state, value: state.value + 1};
@@ -73,13 +79,13 @@ export const setStartValuesAC = (startData: startDataType): setStartValuesAT => 
     startData
   }
 }
-export const changeOutputsAC = (message: string): changeOutputsAT => {
+export const changeOutputsAC = (message: outputModeType): changeOutputsAT => {
   return {
     type: "CHANGE_OUTPUT",
     message
   }
 }
-export const getToLocalStorageAC = (data: {value: number, minValue: number, maxValue: number}): getToLocalStorageAT => {
+export const getToLocalStorageAC = (data: { value: number, minValue: number, maxValue: number }): getToLocalStorageAT => {
   return {
     type: "GET_TO_LOCAL_STORAGE",
     data
